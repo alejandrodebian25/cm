@@ -36,6 +36,9 @@
            
             </ul>
             <ul class="form-inline my-2 my-lg-0">
+            <li>
+            df
+            </li>
                 <a href="includes/logout.php" class="btn btn-danger my-2 my-sm-0" type="submit">Salir</a>
             </ul>
         </div>
