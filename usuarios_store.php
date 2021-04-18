@@ -24,24 +24,28 @@ if (strlen($clave) < 8) {
 if (!preg_match('/[a-z]/', $clave)) {
     $_SESSION['message'] =  "La clave debe tener al menos una letra minúscula";
     $_SESSION['message_type'] = 'danger';
-    header('Location: usuarios.php');  exit;
+    header('Location: usuarios.php');
+    exit;
 }
 if (!preg_match('/[A-Z]/', $clave)) {
     $_SESSION['message'] =  "La clave debe tener al menos una letra mayúscula";
     $_SESSION['message_type'] = 'danger';
-    header('Location: usuarios.php');  exit;
+    header('Location: usuarios.php');
+    exit;
 }
 if (!preg_match('/[0-9]/', $clave)) {
     $_SESSION['message'] =  "La clave debe tener al menos un caracter numérico";
     $_SESSION['message_type'] = 'danger';
-    header('Location: usuarios.php');  exit;
+    header('Location: usuarios.php');
+    exit;
 }
 // caracteres especiales
 $ALLOW_CHARS = "! # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _` { | } ~";
 
-$len = mb_strlen($clave);
+$len = strlen($clave);
 for ($i = 0; $i < $len; $i++) {
-    $arr[] = mb_substr($clave, $i, $i + 1, "UTF-8");
+    // $arr[] = mb_substr($clave, $i, $i + 1, "UTF-8");
+    $arr[] = $clave[$i];
 }
 $sw = false;
 for ($i = 0; $i < $len; $i++) {
@@ -53,7 +57,8 @@ for ($i = 0; $i < $len; $i++) {
 if (!$sw) {
     $_SESSION['message'] =  "La clave debe tener al menos un caracter especial";
     $_SESSION['message_type'] = 'danger';
-    header('Location: usuarios.php');  exit;
+    header('Location: usuarios.php');
+    exit;
 }
 // caracteres especiales
 
@@ -66,7 +71,5 @@ $_SESSION['message_type'] = 'success';
 // validar password
 
 
-$user->insertarUsuario($pnombre,$snombre,$appaterno,$apmaterno,$usuario,password_hash($clave, PASSWORD_DEFAULT));
+$user->insertarUsuario($pnombre, $snombre, $appaterno, $apmaterno, $usuario, password_hash($clave, PASSWORD_DEFAULT));
 header('Location: usuarios.php');
-
-
