@@ -1,0 +1,69 @@
+body{
+    
+    height: 100vh; 
+    /* background-color: cornflowerblue; */
+}
+
+.login-box{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.card{
+    position: relative;
+}
+
+.imagen-box{
+    /* position: relative; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-imagen{
+    background-color: #149A80;
+    padding: 20px;
+    border-radius: 50%;
+    position: absolute;
+    top: -15%;
+    opacity: 0.9;
+    
+}
+img.card-img-top{
+  width: 40px;
+ 
+}
+
+/*  para home*/
+#sidebar-container {
+    min-height: 100vh;
+}
+#sidebar-container .logo{
+    padding: 0.875rem 1.25rem;
+}
+  
+#sidebar-container .menu {
+    width: 15rem;
+}
+
+.avatar {
+    max-width: 35px;
+}
+
+.btn-search {
+    right: 0;
+}
+
+.stat {
+    border-right: 1px solid var(--grey);
+}
+a:hover {
+    text-decoration: none;
+}
+.menu a:hover {
+color: #15A589 !important;
+}
+
+
