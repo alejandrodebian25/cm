@@ -87,7 +87,7 @@ if (isset($_POST['buscarEmpleado'])) {
                                 <label>Fotografia</label>
                                 <input type="file" name="imagen" class="form-control">
                             </div>
-                            <input type="submit" name="guardarEmpleado" class="btn btn-primary btn-block" value="Agregar Uuario">
+                            <input type="submit" name="guardarEmpleado" class="btn btn-primary btn-block" value="Agregar Empleado">
                         </form>
 
                     </div>

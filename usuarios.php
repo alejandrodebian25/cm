@@ -41,7 +41,7 @@ include_once 'includes/user.php';
                     <div class="form-group">
                         <input type="text" class="form-control" id="password" name="password" placeholder="***********">
                     </div>
-                    <input type="submit" name="save_task" class="btn btn-primary btn-block" value="Agregar Uuario">
+                    <input type="submit" name="save_task" class="btn btn-primary btn-block" value="Agregar Usuario">
                 </form>
             </div>
         </div>
