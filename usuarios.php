@@ -1,8 +1,10 @@
-<?php include('vistas/vista_head.php');
+<?php 
+ session_start();
+include('vistas/vista_head.php');
 include_once 'includes/user.php';
  $user = new User();
  $usuarios=$user->getAllUsuarios();
- session_start();
+
 ?>
 
 

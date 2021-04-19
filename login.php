@@ -13,7 +13,7 @@
 
 </head>
 
-<body>
+<body onload="createCaptcha()">
 
 
     <!-- CONTENIDO -->
@@ -22,7 +22,7 @@
 
             <div class="row justify-content-md-center">
                 <div class="col-md-4 ">
-                   
+
                     <div class="card">
 
                         <div class="imagen-box">
@@ -33,7 +33,7 @@
                         </div>
 
                         <div class="card-body mt-5">
-                            <form method="POST" action="">
+                            <form id="form_nuevo_usuario">
                                 <div class="form-group">
                                     <label for="inp_usuario">Usuario</label>
                                     <input type="text" class="form-control" id="inp_usuario" name="username" aria-describedby="emailHelp" placeholder="Ingrese nombre de usuario">
@@ -43,17 +43,17 @@
                                     <label for="inp_password">Clave</label>
                                     <input type="password" class="form-control" id="inp_password" name="password" placeholder="************">
                                 </div>
-
-                                <button type="submit" class="btn btn-primary btn-block">Ingresar</button>
+                                <!-- captcha -->
+                                <div id="captcha">
+                                </div>
+                                <input type="text" placeholder="Ingrese Captcha" id="cpatchaTextBox" />
+                                <!--  -->
+                                <button type="submit" class="btn btn-primary btn-block mt-5">Ingresar</button>
                             </form>
                         </div>
-                        <div class="card-footer">
+                        <div id="errorcito" class="card-footer">
                             <!-- mensaje -->
-                            <?php
-                            if (isset($errorLogin)) {
-                                echo $errorLogin;
-                            }
-                            ?>
+                            
                             <!-- mensaje fin -->
                         </div>
                     </div>
@@ -68,6 +68,7 @@
 
     <script src="public/js/jquery.min.js"></script>
     <script src="public/js/bootstrap.bundle.min.js"></script>
+    <script src="public/js/app.js"></script>
 
 
 </body>

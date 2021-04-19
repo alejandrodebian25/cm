@@ -11,7 +11,12 @@ $apmaterno =  $_POST['apmaterno'];
 // ususario
 $usuario = $pnombre[0] . strtolower($appaterno);
 $clave =  $_POST['password'];
-
+/* 
+=====================================================Verificamos si el usuario existe
+*/
+if ($user->existeUsuario($usuario)) {
+    $usuario=$usuario.$apmaterno[0].$apmaterno[1];
+}
 /* 
 =====================================================REGLAS DE VALIDACION
 */

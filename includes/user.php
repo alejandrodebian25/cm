@@ -15,12 +15,12 @@ class User extends DB
         $query->execute(['user' => $user]);
 
 
-       
+
 
         if ($query->rowCount()) {
 
             while ($fila = $query->fetch()) {
-                
+
                 if (password_verify($pass, $fila["clave"])) {
 
                     return true;
@@ -108,40 +108,51 @@ class User extends DB
     public function updateUsuario($id, $p_nombre, $s_nombre, $p_apellido, $s_apellido, $usuario, $clave = "")
     {
 
-if($clave==""){
-    $consulta = "UPDATE usuario
+        if ($clave == "") {
+            $consulta = "UPDATE usuario
         SET `p_nombre`= :p_nombre, `s_nombre` = :s_nombre, `p_apellido` = :p_apellido, `s_apellido` = :s_apellido, `usuario` = :usuario
         WHERE `id` = :id";
-        $sql = $this->connect()->prepare($consulta);
-        $sql->bindParam(':p_nombre', $p_nombre);
-        $sql->bindParam(':s_nombre', $s_nombre);
-        $sql->bindParam(':p_apellido', $p_apellido);
-        $sql->bindParam(':s_apellido', $s_apellido);
-        $sql->bindParam(':usuario', $usuario);
+            $sql = $this->connect()->prepare($consulta);
+            $sql->bindParam(':p_nombre', $p_nombre);
+            $sql->bindParam(':s_nombre', $s_nombre);
+            $sql->bindParam(':p_apellido', $p_apellido);
+            $sql->bindParam(':s_apellido', $s_apellido);
+            $sql->bindParam(':usuario', $usuario);
 
-        $sql->bindParam(':id', $id);
-}else{
+            $sql->bindParam(':id', $id);
+        } else {
 
-    $consulta = "UPDATE usuario
+            $consulta = "UPDATE usuario
         SET `p_nombre`= :p_nombre, `s_nombre` = :s_nombre, `p_apellido` = :p_apellido, `s_apellido` = :s_apellido, `usuario` = :usuario,`clave` = :clave
         WHERE `id` = :id";
-        $sql = $this->connect()->prepare($consulta);
-        $sql->bindParam(':p_nombre', $p_nombre);
-        $sql->bindParam(':s_nombre', $s_nombre);
-        $sql->bindParam(':p_apellido', $p_apellido);
-        $sql->bindParam(':s_apellido', $s_apellido);
-        $sql->bindParam(':usuario', $usuario);
-        $sql->bindParam(':clave', $clave);
-        $sql->bindParam(':id', $id);
+            $sql = $this->connect()->prepare($consulta);
+            $sql->bindParam(':p_nombre', $p_nombre);
+            $sql->bindParam(':s_nombre', $s_nombre);
+            $sql->bindParam(':p_apellido', $p_apellido);
+            $sql->bindParam(':s_apellido', $s_apellido);
+            $sql->bindParam(':usuario', $usuario);
+            $sql->bindParam(':clave', $clave);
+            $sql->bindParam(':id', $id);
+        }
 
-}
 
-    
         $sql->execute();
         if ($sql->rowCount() > 0) {
             return $sql->rowCount();
         } else {
             return -1;
+        }
+    }
+
+    public function existeUsuario($nombreUsuario)
+    {
+        $query = $this->connect()->prepare('SELECT * FROM usuario WHERE usuario = :comodin');
+        $query->execute(['comodin' => $nombreUsuario]);
+      
+        if ($query->rowCount() > 0) {
+            return true;
+        } else {
+            return false;
         }
     }
 }

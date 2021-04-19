@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -33,12 +34,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="empleados.php">Empleados</a>
                 </li>
-           
+
             </ul>
             <ul class="form-inline my-2 my-lg-0">
-            <li>
-            df
-            </li>
+                <a class="nav-item mr-5">
+                    <?=$_SESSION['user']?>
+                </a>
                 <a href="includes/logout.php" class="btn btn-danger my-2 my-sm-0" type="submit">Salir</a>
             </ul>
         </div>

@@ -1,11 +1,13 @@
-<?php include('vistas/vista_head.php');
+<?php 
+session_start();
+include('vistas/vista_head.php');
 include_once 'includes/user.php';
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
     $user = new User();
     $usuarios = $user->getAllUsuarios();
     $usuario = $user->gsetUserById($id);
-    session_start();
+    
 }
 if (isset($_POST['update'])) {
     $id = $_GET['id'];
@@ -17,18 +19,24 @@ if (isset($_POST['update'])) {
     // ususario
     $usuario = $pnombre[0] . strtolower($appaterno);
     $clave =  $_POST['password'];
-
+    /* 
+    =====================================================Verificamos si el usuario existe
+    */
+    if ($user->existeUsuario($usuario)) {
+        $usuario = $usuario . $apmaterno[0] . $apmaterno[1];
+    }
 
     if ($clave == "") {
 
-        $user->updateUsuario($id,$pnombre, $snombre, $appaterno, $apmaterno, $usuario);
+
+        $user->updateUsuario($id, $pnombre, $snombre, $appaterno, $apmaterno, $usuario);
         header('Location: usuarios.php');
         exit;
     } else {
 
         /* 
-=====================================================REGLAS DE VALIDACION
-*/
+        =====================================================REGLAS DE VALIDACION
+        */
         if (strlen($clave) < 8) {
             $_SESSION['message'] = "La clave debe tener al menos 8 caracteres";
             $_SESSION['message_type'] = 'danger';
@@ -56,9 +64,10 @@ if (isset($_POST['update'])) {
         // caracteres especiales
         $ALLOW_CHARS = "! # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _` { | } ~";
 
-        $len = mb_strlen($clave);
+        $len = strlen($clave);
         for ($i = 0; $i < $len; $i++) {
-            $arr[] = mb_substr($clave, $i, $i + 1, "UTF-8");
+            // $arr[] = mb_substr($clave, $i, $i + 1, "UTF-8");
+            $arr[] = $clave[$i];
         }
         $sw = false;
         for ($i = 0; $i < $len; $i++) {
@@ -70,7 +79,7 @@ if (isset($_POST['update'])) {
         if (!$sw) {
             $_SESSION['message'] =  "La clave debe tener al menos un caracter especial";
             $_SESSION['message_type'] = 'danger';
-            header('Location: usuarios_edit.php?id=' . $id);
+            header('Location: usuarios.php');
             exit;
         }
         // caracteres especiales
@@ -79,15 +88,12 @@ if (isset($_POST['update'])) {
         $_SESSION['message_type'] = 'success';
 
         /* 
-=====================================================REGLAS DE VALIDACION
-*/
-        $user->updateUsuario($id,$pnombre, $snombre, $appaterno, $apmaterno, $usuario, password_hash($clave, PASSWORD_DEFAULT));
+        =====================================================REGLAS DE VALIDACION
+        */
+        $user->updateUsuario($id, $pnombre, $snombre, $appaterno, $apmaterno, $usuario, password_hash($clave, PASSWORD_DEFAULT));
         header('Location: usuarios.php');
         exit;
     }
-
-
-
 }
 
 ?>
