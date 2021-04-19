@@ -1,9 +1,23 @@
 <?php
-session_start();
-include('vistas/vista_head.php');
-include_once 'includes/empleado.php';
-$emp = new Empleado();
-$usuarios = $emp->getAllEmpleados();
+if (isset($_POST['buscarEmpleado'])) {
+    # code...
+    session_start();
+    include('vistas/vista_head.php');
+    include_once 'includes/empleado.php';
+    $emp = new Empleado();
+    // ==========Parametros de busqueda
+    $dato =  $_POST['dato'];
+    $cb =  $_POST['cb'];
+
+    // ==========Parametros de busqueda
+
+
+    $usuarios = $emp->searchEmpleados($cb,$dato);
+} else {
+    header('Location: empleados.php');
+    exit;
+}
+
 
 ?>
 
@@ -27,15 +41,15 @@ $usuarios = $emp->getAllEmpleados();
 
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Empleado</a>
+                        <a class="nav-link " id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Empleado</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Buscar</a>
+                        <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Buscar</a>
                     </li>
 
                 </ul>
                 <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <div class="tab-pane fade " id="home" role="tabpanel" aria-labelledby="home-tab">
 
                         <form action="empleados_store.php" method="POST" enctype="multipart/form-data" class="p-2">
                             <div class="form-group">
@@ -77,7 +91,7 @@ $usuarios = $emp->getAllEmpleados();
                         </form>
 
                     </div>
-                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                    <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                         <!-- busqueda -->
                         <form action="empleados_search.php" method="POST" enctype="multipart/form-data" class="p-2">
 
@@ -85,30 +99,30 @@ $usuarios = $emp->getAllEmpleados();
                             <p>Criterio de Busqueda</p>
 
                             <div>
-                                <input type="radio" id="pn" name="cb" value="p_nombre" checked>
+                                <input type="radio" id="pn" name="cb" value="p_nombre" <?=$cb=="p_nombre"?'checked':''?>>
                                 <label for="pn">1er. Nombre</label>
                             </div>
 
                             <div>
-                                <input type="radio" id="pa" name="cb" value="p_apellido">
+                                <input type="radio" id="pa" name="cb" value="p_apellido" <?=$cb=="p_apellido"?'checked':''?>>
                                 <label for="pa">1er. Apellido</label>
                             </div>
 
                             <div>
-                                <input type="radio" id="sa" name="cb" value="s_apellido">
+                                <input type="radio" id="sa" name="cb" value="s_apellido"<?=$cb=="s_apellido"?'checked':''?>>
                                 <label for="sa">2do. Apellido</label>
                             </div>
                             <div>
-                                <input type="radio" id="ge" name="cb" value="genero">
+                                <input type="radio" id="ge" name="cb" value="genero"<?=$cb=="genero"?'checked':''?>>
                                 <label for="ge">Genero</label>
                             </div>
                             <div>
-                                <input type="radio" id="cel" name="cb" value="celular">
+                                <input type="radio" id="cel" name="cb" value="celular"<?=$cb=="celular"?'checked':''?> >
                                 <label for="cel">Nro. Celular</label>
                             </div>
 
                             <div class="form-group">
-                                <input type="text" class="form-control" id="dato" name="dato" placeholder="">
+                                <input type="text" class="form-control" id="dato" name="dato" placeholder="" value="<?=$dato?>">
                             </div>
 
 
