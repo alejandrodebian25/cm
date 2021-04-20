@@ -22,9 +22,9 @@ if (isset($_POST['update'])) {
     /* 
     =====================================================Verificamos si el usuario existe
     */
-    if ($user->existeUsuario($usuario)) {
-        $usuario = $usuario . $apmaterno[0] . $apmaterno[1];
-    }
+    // if ($user->existeUsuario($usuario)) {
+    //     $usuario = $usuario . $apmaterno[0] . $apmaterno[1];
+    // }
 
     if ($clave == "") {
 

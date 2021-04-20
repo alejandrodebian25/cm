@@ -25,7 +25,7 @@ class Empleado extends DB
     }
     public function getAllEmpleados()
     {
-        $query = $this->connect()->prepare('SELECT * FROM empleado');
+        $query = $this->connect()->prepare('SELECT * FROM empleado ORDER BY id_empleado DESC');
         $query->execute();
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
@@ -39,7 +39,18 @@ class Empleado extends DB
     }
 
 
-
+    public function eliminarEmpleado($id)
+    {
+        $consulta = "DELETE FROM empleado WHERE id_empleado=:id ";
+        $sql = $this->connect()->prepare($consulta);
+        $sql->bindParam(':id', $id);
+        $sql->execute();
+        if ($sql->rowCount() > 0) {
+            $count = $sql->rowCount();
+            return $count;
+        }
+        return -1;
+    }
 
 
 

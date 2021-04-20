@@ -176,10 +176,10 @@ if (isset($_POST['buscarEmpleado'])) {
 
 
                                     <td>
-                                        <a href="usuarios_edit.php?id=<?= $usuario->id ?>" type="button" class="edit_pro btn btn-sm btn-outline-warning">
+                                        <a href="#" type="button" class="edit_pro btn btn-sm btn-outline-warning">
                                             <img src="public/icons/edit.png" alt="">
                                         </a>
-                                        <a href="usuarios_delete.php?id=<?= $usuario->id ?>" type="button" class="delete_pro btn btn-sm btn-outline-danger">
+                                        <a href="empleados_delete.php?id=<?= $usuario->id_empleado ?>" type="button" class="delete_pro btn btn-sm btn-outline-danger">
                                             <img src="public/icons/delete.png" alt="">
                                         </a>
 
